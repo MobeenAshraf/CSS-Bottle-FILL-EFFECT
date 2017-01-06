@@ -1,0 +1,128 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script>
+    var val=8.99; // Value of small bottle
+    var o=100;
+    var t; 
+
+    var cnt=1;
+    $(document).ready(function() {
+        $("#bo2").hide();
+        $("#bo3").hide();
+        setTimeout(function(){ //fill bottle 1
+            if(o<=val){
+                t=o/val*120;
+                $('#fillColor').animate({top: -t}, 2000, function () {
+                })
+                o=0;
+            }else{
+                t=120;
+                $('#fillColor').animate({top: -t}, 2000, function () {
+                })
+                o=o-val;
+            }
+        },500);
+        setTimeout(function(){ //fill bottle 2
+            if(o>0) {
+            //insert/display -2 div
+                $("#bo2").show();
+                if (o > 0 && o <= val) {
+                    t = o / val * 120;
+                    $('#fillColor-2').animate({top: -t}, 2000, function () {
+                    })
+                    o=0;
+                }else {
+                    t = 120;
+                    $('#fillColor-2').animate({top: -t}, 2000, function () {
+                    })
+                    o = o - val;
+                }
+            }
+        },1000);
+        setTimeout(function(){ //fill bottle 3
+            if(o>0) {
+                $("#bo3").show();
+                //insert/display -2 div
+                if (o > 0 && o <= val) {
+                    t = o / val * 120;
+                    $('#fillColor-3').animate({top: -t}, 2000, function () {
+                    })
+                    o=0;
+                }else{
+                    t = 120;
+                    $('#fillColor-3').animate({top: -t}, 2000, function () {
+                    })
+                    o = o - val;
+                }
+                setTimeout(function(){
+                    if(o>=0){
+                        $("#rep").html("<div id='bigo' style='max-height:360px;max-width:138px;overflow:hidden;'> <img src='url.png' style='position:relative;top:0px;left:0px;z-index:1;float:left;max-height:360px' />  <img src='g.gif' id='big' style='height:360px; width:99%; position:relative;top:0px;left:0px;z-index:-.5;float:left;' /></div>");
+                         t = 240;
+                        $('#big').animate({top: -t }, 2000, function () {
+                        })
+                        setTimeout(function(){
+                            multiply();
+                        },2000);
+                    }
+                },2000);
+            }
+        },2000);
+    //-------------------big bottle
+
+    //your code
+        function multiply() {
+            setTimeout(function(){
+                $("#rep").html("<div id='bigo' style='max-height:360px;max-width:138px;overflow:hidden;'> <img src='url.png'  style='max-height:360px;position:relative;top:0px;left:0px;z-index:1;float:left;' />  <img src='g.gif' id='big' style='height:360px;position:relative; width:99%; top:0px;left:0px;z-index:-.5;float:left;' /></div>");
+//                alert(o);
+                if(o>=0) {    
+                    $("#cuh").html("<h1>"+cnt+"</h1>");
+                //insert/display -2 div
+                    if (o > 1 && o < (val*3)) {
+                        t = (o / (val*3)) * 240;
+                        $('#big').animate({top: -t }, 2000, function () {
+                        })
+                        o=0;
+                    }else {
+                        t = 240;
+                        $('#big').animate({top: -t }, 2000, function () {
+                        })
+                        o = o - (val*3);
+                        cnt++;
+                    }
+                    setTimeout(function(){
+                        if(o>0){
+                            multiply();
+                        }
+                    },2000);
+                }
+            },800);
+        }
+    });
+
+</script>
+</head>
+<body>
+<!--<div id="cuh" style="float: right; margin-bottom: 30px"></div>-->
+<div id="cuh" style="z-index:100; position: absolute; left:60px; top:180px; color:gray; font-size:24px;"></div>
+<div id="rep"   style="">
+    <div class="row">
+        <div id="bo1" class="col-sm-3" style="max-height:200px;max-width:80px;overflow:hidden; margin-left: 10px">
+            <img src="s.png" style="max-height:200px;position:relative;top:0px;left:0px;z-index:1;float:left;" />
+            <img src="g.gif" id="fillColor" style="height:200px;max-width:200px;position:relative;top:0px;left:0px;z-index:-.1;float:left;" />
+        </div>
+        <div id="bo2"  class="col-sm-3" style="max-height:200px;max-width:80px;overflow:hidden;">
+            <img src="s.png" style="max-height:200px;position:relative;top:0px;left:0px;z-index:1;float:left;" />
+            <img src="g.gif" id="fillColor-2" style="height:200px;max-width:200px;position:relative;top:0px;left:0px;z-index:-.1;float:left;" />
+        </div>
+        <div id="bo3" class="col-sm-3" style="max-height:200px;max-width:80px;overflow:hidden;">
+            <img src="s.png" style="max-height:200px;position:relative;top:0px;left:0px;z-index:1;float:left;" />
+            <img src="g.gif" id="fillColor-3" style="height:200px;max-width:200px;position:relative;top:0px;left:0px;z-index:-.1;float:left;" />
+        </div>
+    </div>
+</div>
+</body>
+</html>
